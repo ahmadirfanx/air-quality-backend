@@ -19,11 +19,18 @@ COPY . .
 # Build TypeScript to JavaScript (skip type errors for now)
 RUN npm run build || echo "Build completed with warnings"
 
-# Remove dev dependencies to reduce image size but keep concurrently
-RUN npm prune --production && npm install concurrently
+# Install nodemon and ts-node globally before switching user
+RUN npm install -g nodemon ts-node typescript
+
+# Keep some dev dependencies needed for runtime
+RUN npm prune --production && npm install typescript ts-node @types/node nodemon
 
 # Create dist directory if build failed
 RUN mkdir -p dist
+
+# Copy and make start script executable
+COPY start.sh ./
+RUN chmod +x start.sh
 
 # Expose port
 EXPOSE 3000
@@ -35,5 +42,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # Don't run as root in production
 USER node
 
-# Start the application
-CMD ["npm", "run", "dev:all"]
+# Start both processes using shell script
+CMD ["./start.sh"]
