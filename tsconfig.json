@@ -19,21 +19,21 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     
-    // Type Checking - Relaxed but still professional
-    "strict": false,  // Disabled strict mode to reduce friction
-    "noImplicitAny": false,  // Allow implicit any for faster development
-    "noImplicitReturns": false,  // Don't require return statements in all paths
-    "noImplicitThis": true,  // Keep this for better code quality
-    "noUnusedLocals": false,  // Allow unused variables during development
-    "noUnusedParameters": false,  // Allow unused parameters
-    "allowUnusedLabels": false,  // Prevent unused labels (good practice)
-    "allowUnreachableCode": false,  // Prevent unreachable code (good practice)
+    // Type checking
+    "strict": false,  // disabled for dev speed
+    "noImplicitAny": false,  // allow any for now
+    "noImplicitReturns": false,  // optional returns
+    "noImplicitThis": true,  // keep for quality
+    "noUnusedLocals": false,  // allow unused vars
+    "noUnusedParameters": false,  // allow unused params
+    "allowUnusedLabels": false,  // prevent unused labels
+    "allowUnreachableCode": false,  // prevent unreachable code
     
     // Advanced
-    "experimentalDecorators": true,  // Useful for frameworks like Express with decorators
+    "experimentalDecorators": true,  // for decorators
     "emitDecoratorMetadata": true,
     
-    // Path Mapping - Shows architectural thinking
+    // Path aliases
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
@@ -46,7 +46,7 @@
   },
   "ts-node": {
     "require": ["tsconfig-paths/register"],
-    "transpileOnly": true  // Faster compilation during development
+    "transpileOnly": true  // faster builds
   },
   "include": ["src/**/*"],
   "exclude": [
@@ -54,6 +54,6 @@
     "dist", 
     "**/*.test.ts", 
     "**/*.spec.ts",
-    "coverage"  // Exclude coverage reports
+    "coverage"
   ]
 }
