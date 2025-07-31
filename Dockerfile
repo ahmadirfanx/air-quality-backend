@@ -28,6 +28,9 @@ RUN npm prune --production && npm install typescript ts-node @types/node nodemon
 # Create dist directory if build failed
 RUN mkdir -p dist
 
+# Create uploads directory and set permissions
+RUN mkdir -p uploads && chown node:node uploads
+
 # Copy and make start script executable
 COPY start.sh ./
 RUN chmod +x start.sh
